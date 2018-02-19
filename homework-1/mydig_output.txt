@@ -1,7 +1,7 @@
 Note to TA:
 I mainly use CNN and Amazon as test examples in this file. Although I tested many other famous websites, and mydig gets virtually the same result as dig.
 
-Thirteen input tests I demenstrated in this file:
+Thirteen input tests I demonstrated in this file:
 1.  python mydig.py www.cnn.com A
 2.  python mydig.py google.co.jp A
 3.  python mydig.py cnn.com A

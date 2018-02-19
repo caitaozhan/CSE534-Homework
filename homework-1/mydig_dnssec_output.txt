@@ -1,0 +1,80 @@
+Note to TA:
+I used three examples in this file: paypal.com, cnn.com, and dnssec-failed.org. I compared the intermediate steps with https://dnssec-debugger.verisignlabs.com. EVERY verification steps are the same.
+
+Three input tests I demonstrated in this file:
+1. python mydig.py paypal.com A +dnssec
+2. python mydig.py cnn.com A +dnssec
+3. python mydig.py dnssec-failed.org A +dnssec
+
+
+==================================================================================================================
+(Input)
+python mydig.py paypal.com A +dnssec
+
+
+(Output)
+
+Congrats! . DNSKEYs are verified
+Congrats! com. DS is verified
+Congrats! Root verified
+Congrats! com. DNSKEYs are verified
+Congrats! paypal.com. DS is verified
+Congrats! Zone com. verified
+Congrats! paypal.com. DNSKEYs are verified
+Congrats! A records are good~
+Congrats! Zone paypal.com. verified
+
+ QUESTION:
+paypal.com. IN A
+
+ ANSWER:
+paypal.com. 300 IN A 64.4.250.32
+paypal.com. 300 IN A 64.4.250.33
+paypal.com. 300 IN RRSIG A 5 2 300 20180227181123 20180128174703 11811 paypal.com. zJ22XRBBNn7dQJRrmpuCxuVqe8M8iCiD oQhN8Yi2969m+HbzJnc/3vz4/s6/TCYB w01uS0vclejIXj3VxLd0a06LR183J8GZ 7fneqNOVxuxxaRLSQ9GR4/sIQb4SMOrf UOfSfefCI+B4GV/7FHKGRDZr5LGnBCV5 At4mS4OmsfY=
+
+
+Query time: 321 msec
+WHEN: Mon Feb 19 10:29:02 2018
+MSG SIZE rcvd:  899 
+
+==================================================================================================================
+(Input)
+python mydig.py cnn.com A +dnssec
+
+
+(Output)
+
+Congrats! . DNSKEYs are verified
+Congrats! com. DS is verified
+Congrats! Root verified
+
+Query time: 344 msec
+WHEN: Mon Feb 19 10:29:11 2018
+
+DNSSEC not supported
+
+==================================================================================================================
+(Input)
+python mydig.py dnssec-failed.org A +dnssec
+
+
+(Output)
+
+Congrats! . DNSKEYs are verified
+Congrats! org. DS is verified
+Congrats! Root verified
+Congrats! org. DNSKEYs are good~
+Congrats! dnssec-failed.org. DS is verified
+Congrads! Zone org. verified
+Congrats! dnssec-failed.org. DNSKEYs are verified
+Congrats! A records are good~
+Sorry! None of the 2 public key signing keys of dnssec-failed.org. can be verified by its DS in parent's zone! Thus, zone dnssec-failed.org. is NOT verified
+
+Query time: 746 msec
+WHEN: Mon Feb 19 10:29:23 2018
+
+DNSSec Verification failed
+
+==================================================================================================================
+													THE END
+==================================================================================================================
