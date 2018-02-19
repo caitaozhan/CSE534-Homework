@@ -446,7 +446,7 @@ def verify_a(response, name_key, dnskey):
     except Exception as e:
         raise e
     else:
-        print('Congrats! A records are good~')
+        print('Congrats! A records are verified')
 
 
 def verify_ns(response, name_key, dnskey):
@@ -463,7 +463,7 @@ def verify_ns(response, name_key, dnskey):
     except Exception as e:
         print('Oops! Validation failure:', e)
     else:
-        print('Congrats! NS records are good~')
+        print('Congrats! NS records are verified')
 
 
 def verify_root(dnskeys):
@@ -559,7 +559,7 @@ def verify_org_dnskey(ip):
     except Exception as e:
         raise e
     else:
-        print('Congrats!', name_org, 'DNSKEYs are good~')
+        print('Congrats!', name_org, 'DNSKEYs are verified')
         return name_org, dnskey_org
 
 
@@ -583,7 +583,7 @@ def verify_org_zone(dnskey_org, response_parent):
     ds1 = dns.dnssec.make_ds(name, dnskey_org.items[1], algorithm)
     if (ds1 == trust_ds or ds2 == trust_ds) == 0:
         raise Exception('DS does not match!', name)
-    print('Congrads! Zone', name, 'verified')
+    print('Congrats! Zone', name, 'verified')
 
 
 class Flag(Enum):
