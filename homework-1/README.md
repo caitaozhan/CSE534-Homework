@@ -1,3 +1,19 @@
+Hi TA, 
+
+All the code for Part A and Part B is in mydig.py
+
+There are also three Jupyter notebook files. I did not delete them because I actually code in notebooks. When I finish implementing and debugging, I copy the code from the notebook to mydig.py
+
+The output for Part A is in mydig_output.txt. The output for Part B is in mydig_dnssec_output.txt
+
+There are also two PDF files as required
+
+
+Thanks for your time,
+
+Caitao Zhan
+
+
 # External libraries used:
 
 import dns.query
@@ -18,6 +34,9 @@ from enum import Enum
 
 import pandas
 
+import matplotlib.pyplot as plt
+
+import numpy as np
 
 ---
 
