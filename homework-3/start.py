@@ -46,13 +46,14 @@ def startNetwork():
 
     info('** Dumping host connections\n')
     dumpNodeConnections(net.hosts)
-
     info('** Testing network connectivity\n')
     net.ping(net.hosts)
 
     info('** Dumping host processes\n')
     for host in net.hosts:
         host.cmdPrint("ps aux")
+
+    net.ping(net.hosts)
 
     info('** Running CLI\n')
     CLI(net)
