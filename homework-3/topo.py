@@ -34,10 +34,10 @@ class QuaggaTopo(Topo):
 
         # List of Quagga host configs
         quaggaHosts = []
-        quaggaHosts.append(QuaggaHost(name='r1', ip='223.1.1.0/24'))
-        quaggaHosts.append(QuaggaHost(name='r2', ip='223.1.2.0/24'))
-        quaggaHosts.append(QuaggaHost(name='r3', ip='223.1.3.0/24'))
-        quaggaHosts.append(QuaggaHost(name='r4', ip='223.1.4.0/24'))
+        quaggaHosts.append(QuaggaHost(name='r1', ip='223.1.1.1/24'))
+        quaggaHosts.append(QuaggaHost(name='r2', ip='223.1.2.1/24'))
+        quaggaHosts.append(QuaggaHost(name='r3', ip='223.1.1.2/24'))
+        quaggaHosts.append(QuaggaHost(name='r4', ip='223.1.3.2/24'))
         quaggaHosts.append(QuaggaHost(name='h1', ip='223.1.5.10/24'))
         quaggaHosts.append(QuaggaHost(name='h2', ip='223.1.6.10/24'))
 
@@ -73,21 +73,21 @@ class QuaggaTopo(Topo):
 
     def setIP(self, net):
         r1 = net.get('r1')
-        r1.setIP(intf='r1-eth0', ip='223.1.5.0/24')
-        r1.setIP(intf='r1-eth1', ip='223.1.2.1/24')
-        r1.setIP(intf='r1-eth2', ip='223.1.1.0/24')
+        r1.setIP(intf='r1-eth0', ip='223.1.5.1/24')
+        r1.setIP(intf='r1-eth1', ip='223.1.2.2/24')
+        r1.setIP(intf='r1-eth2', ip='223.1.1.1/24')
 
         r2 = net.get('r2')
-        r2.setIP(intf='r2-eth0', ip='223.1.2.0/24')
-        r2.setIP(intf='r2-eth1', ip='223.1.4.1/24')
+        r2.setIP(intf='r2-eth0', ip='223.1.2.1/24')
+        r2.setIP(intf='r2-eth1', ip='223.1.4.2/24')
 
         r3 = net.get('r3')
-        r3.setIP(intf='r3-eth0', ip='223.1.3.0/24')
-        r3.setIP(intf='r3-eth1', ip='223.1.1.1/24')
+        r3.setIP(intf='r3-eth0', ip='223.1.3.1/24')
+        r3.setIP(intf='r3-eth1', ip='223.1.1.2/24')
 
         r4 = net.get('r4')
-        r4.setIP(intf='r4-eth0', ip='223.1.6.0/24')
-        r4.setIP(intf='r4-eth1', ip='223.1.3.1/24')
-        r4.setIP(intf='r4-eth2', ip='223.1.4.0/24')
+        r4.setIP(intf='r4-eth0', ip='223.1.6.1/24')
+        r4.setIP(intf='r4-eth1', ip='223.1.3.2/24')
+        r4.setIP(intf='r4-eth2', ip='223.1.4.1/24')
 
 
