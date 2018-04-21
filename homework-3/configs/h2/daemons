@@ -18,7 +18,7 @@
 # When using "vtysh" such a config file is also needed. It should be owned by
 # group "quaggavty" and set to ug=rw,o= though. Check /etc/pam.d/quagga, too.
 #
-zebra=no
+zebra=yes
 bgpd=no
 ospfd=no
 ospf6d=no
