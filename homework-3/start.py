@@ -25,6 +25,7 @@ from topo import QuaggaTopo
 
 net = None
 
+import time
 
 def startNetwork():
     "instantiates a topo, then starts the network and prints debug information"
@@ -42,17 +43,35 @@ def startNetwork():
 
     # change IP forwarding variable to 1
     for host in net.hosts:
-        host.cmdPrint("echo '1' > /proc/sys/net/ipv4/ip_forward")
+        host.cmd("echo '1' > /proc/sys/net/ipv4/ip_forward")
 
-    info('** Dumping host connections\n')
-    dumpNodeConnections(net.hosts)
+    # info('** Dumping host connections\n')
+    # dumpNodeConnections(net.hosts)
+
+    #info('** Testing network connectivity\n')
+    #net.ping(net.hosts)
+
+    #info('** Testing network connectivity\n')
+    #net.ping(net.hosts)
+    #info('** Dumping host processes\n')
+    #for host in net.hosts:
+     #   host.cmdPrint("ps aux")
+
+    net.get('h1').cmdPrint("python /home/ping.py > /home/ping.log &")
+
+    '''
+    for i in range(1,50):
+        #net.get('h1').cmdPrint("route")
+        output = net.get('h1').cmd("ping -c 1 223.1.6.10")
+        time.sleep(0.2)
+        if output.find("unreachable") >= 0:
+            continue
+        else:
+            print 'time it takes for h1 to be able to ping h2=', i*0.2, 's'
+            break
+    '''
+
     info('** Testing network connectivity\n')
-    net.ping(net.hosts)
-
-    info('** Dumping host processes\n')
-    for host in net.hosts:
-        host.cmdPrint("ps aux")
-
     net.ping(net.hosts)
 
     info('** Running CLI\n')
