@@ -10,7 +10,7 @@ class DistanceVector:
             Read neighbor file and init the distance vector
         '''
 
-        self._dv = []  # a distance vector is essentially a list
+        self.__dv = []  # a distance vector is essentially a list
 
         with open('neighbor/' + hostname, 'r') as f:
             lines = f.readlines()
@@ -18,12 +18,23 @@ class DistanceVector:
                 line = line.strip().split(' ')
                 neighbor = line[0]
                 weight   = line[1]
-                self._dv.append(self.Distance(Dest=neighbor, Cost=weight, Next=neighbor))
+                self.__dv.append(self.Distance(Dest=neighbor, Cost=int(weight), Next=neighbor))
+
+
+    def add_distance(self, distance):
+        self.__dv.append(distance)
+
+
+    dv = property()
+
+    @dv.getter
+    def dv(self):
+        return self.__dv
 
 
     def __str__(self):
         string = ''
-        for distance in self._dv:
+        for distance in self.__dv:
             string += str(distance) + '\n'
         return string
 

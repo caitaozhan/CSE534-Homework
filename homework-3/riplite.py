@@ -16,8 +16,22 @@ class Host:
     def __init__(self, hostname):
         self.hostname = hostname
         self.my_dv = DistanceVector(hostname)
-        self.other_dv = []
-        // DOTO: finish initialization
+        self.neighbor     = []
+        self.non_neighbor = []
+
+        for host in self.all_hosts:
+            for distance in self.my_dv.dv:
+                if host == distance.Dest:
+                    self.neighbor.append(host)
+                    break
+                elif host == self.hostname:
+                    break
+            else: # not a neighbor of this host, also not itself
+                self.non_neighbor.append(host)
+
+        for host in self.non_neighbor:
+            self.my_dv.add_distance(DistanceVector.Distance(Dest=host, Cost=9999, Next=''))
+
 
     def __str__(self):
         string = self.hostname + "'s distance vector: \n"
@@ -26,11 +40,25 @@ class Host:
 
 
 if __name__ == '__main__':
+    h1 = Host('h1')
+    h2 = Host('h2')
+    r1 = Host('r1')
+    r2 = Host('r2')
+    r3 = Host('r3')
+    r4 = Host('r4')
+    print h1
+    print h2
+    print r1
+    print r2
+    print r3
+    print r4
+
+    '''
     if len(sys.argv) == 2:
         hostname = sys.argv[1]
         host = Host(hostname)
         print(host)
     else:
         print('Error with parameters')
-
+    '''
 
