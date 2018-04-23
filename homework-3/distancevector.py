@@ -9,17 +9,17 @@ class DistanceVector:
         '''
             Read neighbor file and init the distance vector
         '''
-
         self.__dv = []  # a distance vector is essentially a list
-
-        with open('neighbor/' + hostname, 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                line = line.strip().split(' ')
-                neighbor = line[0]
-                weight   = line[1]
-                self.__dv.append(self.Distance(Dest=neighbor, Cost=int(weight), Next=neighbor))
-
+        try:
+            with open('/home/neighbor/' + hostname, 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    line = line.strip().split(' ')
+                    neighbor = line[0]
+                    weight   = line[1]
+                    self.__dv.append(self.Distance(Dest=neighbor, Cost=int(weight), Next=neighbor))
+        except Exception as e:
+            print(e)
 
     def add_distance(self, distance):
         self.__dv.append(distance)

@@ -1,0 +1,61 @@
+checkpoint-1
+223.1.5.1
+checkpoint-2
+h1 is listening at port 6666
+waiting for accept
+r1 received your distance vector
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='h2', Cost=9999, Next='')
+Distance(Dest='r2', Cost=9999, Next='')
+Distance(Dest='r3', Cost=9999, Next='')
+Distance(Dest='r4', Cost=9999, Next='')
+
+after updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='h2', Cost=9999, Next='')
+Distance(Dest='r2', Cost=12, Next='r1')
+Distance(Dest='r3', Cost=8, Next='r1')
+Distance(Dest='r4', Cost=13, Next='r1')
+
+223.1.5.1
+r1 received your distance vector
+h1 successfully send dv to neighbors
+h1 successfully send dv to neighbors
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='h2', Cost=9999, Next='')
+Distance(Dest='r2', Cost=12, Next='r1')
+Distance(Dest='r3', Cost=8, Next='r1')
+Distance(Dest='r4', Cost=13, Next='r1')
+
+after updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='r2', Cost=12, Next='r1')
+Distance(Dest='r3', Cost=8, Next='r1')
+Distance(Dest='r4', Cost=13, Next='r1')
+Distance(Dest='h2', Cost=18, Next='r1')
+
+223.1.5.1
+r1 received your distance vector
+h1 successfully send dv to neighbors
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='r2', Cost=12, Next='r1')
+Distance(Dest='r3', Cost=8, Next='r1')
+Distance(Dest='r4', Cost=13, Next='r1')
+Distance(Dest='h2', Cost=18, Next='r1')
+
+after updating my DV
+Distance(Dest='r1', Cost=2, Next='r1')
+Distance(Dest='r2', Cost=12, Next='r1')
+Distance(Dest='r3', Cost=8, Next='r1')
+Distance(Dest='r4', Cost=13, Next='r1')
+Distance(Dest='h2', Cost=15, Next='r1')
+
+223.1.5.1
+r1 received your distance vector
+h1 successfully send dv to neighbors

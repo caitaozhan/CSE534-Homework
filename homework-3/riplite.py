@@ -5,6 +5,7 @@ from thread import start_new_thread
 import time
 import threading
 
+
 class Host:
     '''
         This class encapsulate a host (host + router)
@@ -15,11 +16,17 @@ class Host:
 
     all_hosts = ['h1', 'h2', 'r1', 'r2', 'r3', 'r4']
 
+
     def __init__(self, hostname):
         self.hostname = hostname
+        print('init cp-0')
         self.my_dv = DistanceVector(hostname)
+        print('init cp-1')
         self.neighbor     = []
         self.non_neighbor = []
+        self.neighbor_ip  = {}
+        self.read_neighbor_ip()
+        print(self.neighbor_ip)
 
         for host in self.all_hosts:
             for distance in self.my_dv.dv:
@@ -35,75 +42,76 @@ class Host:
             self.my_dv.add_distance(DistanceVector.Distance(Dest=host, Cost=9999, Next=''))
 
 
+    def writelog(self, message):
+        f = open('/home/log/'+self.hostname, 'a')
+        f.write(message)
+        f.close()
+
+
+    def read_neighbor_ip(self):
+        with open('/home/neighbor/' + self.hostname + '_neighbor', 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip().split(' ')
+                neighbor = line[0]
+                ip = line[1]
+                self.neighbor_ip[neighbor] = ip
+
+
     def __str__(self):
         string = self.hostname + "'s distance vector: \n"
         string += self.my_dv.__str__()
         return string
 
 
-    def socket_test(self):
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            print('socket successfully created')
-        except socket.error as err:
-            print('socket creation failed with error %s' %(err))
-
-        port = 80
-
-        try:
-            host_ip = socket.gethostbyname('www.google.com')
-            print(host_ip)
-        except socket.error as err:
-            print('there was an error resolving the host')
-
-        s.connect((host_ip, port))
-        print("the socket has successfully connected to google")
-
-
     def start_listening(self):
         '''This is the server side.
         '''
-        host = ''
+        host = '0.0.0.0'      # listening to all interfaces
         port = 6666
 
+        s = None
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.bind((host, port))
             s.listen(5)
-            print(self.hostname + ' is listening at port %d' %(port))
+            self.writelog((self.hostname + ' is listening at port %d\n' %(port)))
         except socket.error as err:
-            print(self.hostname + ' socket failed with error %s' %(err))
+            self.writelog((self.hostname + ' socket failed with error %s\n' %(err)))
+
+        #time.sleep(10)
+
         while 1:
             try:
+                self.writelog('waiting for accept\n')
                 conn, addr = s.accept() # wait to accept a connection - blocking call
-                print('connection with ' + addr[0] + ':' + str(addr[1]))
 
-                start_new_thread(self.clientthread, (conn,))
+                t = threading.Thread(target=self.clientthread, args=(conn, addr))
+                t.start()
             except Exception as e:
-                print('Oops! Error!. Socket is now closed.')
+                self.writelog('Oops! Error!. Socket is now closed.\n')
                 s.close()
 
 
-    def clientthread(self, conn):
+    def clientthread(self, conn, addr):
         '''Handle a connection from client. Used for creating threads
         '''
-        dv = ''
-        while 1:
-            try:
-                data = conn.recv(1024)  # data is the distance vector
-                reply = 'OK...'
-                if not data:
-                    break
-                else:
-                    dv = data.split('\n')
-                    print(data)
-            except Exception as e:
-                print('error in receiving data', e)
+        print('connection with ' + addr[0] + ':' + str(addr[1]))
 
-            conn.sendall(self.hostname + ' received your distance vector')
+        dv = ''
+
+        try:
+            data = conn.recv(1024)  # data is the distance vector
+            dv = data.split('\n')
+            print(data)
+        except Exception as e:
+            print('error in receiving data', e)
+
+        conn.sendall(self.hostname + ' received your distance vector')
+
         conn.close()
-        print('start updating my DV')
-        print(self.my_dv)
+        self.writelog('before updating my DV\n')
+        self.writelog(str(self.my_dv)+'\n')
         neighbor_dv = []
         for distance in dv[1:-1]:
             distance  = distance.split(' ')
@@ -141,28 +149,49 @@ class Host:
         lock.release()
 
         if flag:
-            time.sleep(0.5)
-            self.send_dv()
+            t = threading.Thread(target=host.send_dv)
+            t.start()
 
-        print('end updating my DV')
-        print(self.my_dv)
+        self.writelog('after updating my DV\n')
+        self.writelog(str(self.my_dv) + '\n')
 
 
     def send_dv(self):
         '''Send host's distance vector to all its neighbors
         '''
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        send_queue = []
+        for neighbor in self.neighbor:
+            send_queue.append(self.neighbor_ip[neighbor])
+
         port = 6666
-        ip = 'localhost'
+        while len(send_queue) >= 1:
+            try:
+                ip = send_queue[0]
+                self.writelog(ip + '\n')
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.connect((ip, port))
+                s.send(self.data_to_send())
+                reply = s.recv(1048)
+                self.writelog(reply + '\n')
+                send_queue.pop(0)
+                time.sleep(0.1)
+            except socket.error as err:
+                self.writelog('Oops! error when sending distance vector', err)
+
+        self.writelog(self.hostname + ' successfully send dv to neighbors' + '\n')
+
+        '''
+        ip = '0.0.0.0'
         try:
             s.connect((ip, port))
             s.send(self.data_to_send())
             reply = s.recv(1048)
-            print(reply)
+            print(reply
         except socket.error as err:
             print('Oops! error when sending distance vector', err)
         finally:
             s.close()
+        '''
 
 
     def data_to_send(self):
@@ -182,15 +211,24 @@ if __name__ == '__main__':
     if len(sys.argv) == 2:
         hostname = sys.argv[1]
         host = Host(hostname)
-        host.start_listening()
-        host.send_dv()
+        host.writelog('checkpoint-1\n')
+        t = threading.Thread(target=host.send_dv)
+        t.start()
 
-        '''
+        host.writelog('checkpoint-2\n')
+        #print('checkpoint-1')
         host.start_listening()
-        while 1:
-            time.sleep(1)
-            host.send_dv()
-        '''
+
+        #print('checkpoint-2')
     else:
         print('Error with parameters')
 
+
+    '''
+    hostname = sys.argv[1]
+    host = Host(hostname)
+    if hostname == 'r1':
+        host.start_listening()
+    else:
+        host.send_dv()
+    '''

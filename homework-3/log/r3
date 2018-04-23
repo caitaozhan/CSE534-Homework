@@ -1,0 +1,124 @@
+checkpoint-1
+223.1.1.1
+checkpoint-2
+r3 is listening at port 6666
+waiting for accept
+r1 received your distance vector
+223.1.3.2
+r4 received your distance vector
+r3 successfully send dv to neighbors
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=9999, Next='')
+Distance(Dest='h2', Cost=9999, Next='')
+Distance(Dest='r2', Cost=9999, Next='')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='r2', Cost=16, Next='r1')
+Distance(Dest='h2', Cost=22, Next='r1')
+
+223.1.1.1
+r1 received your distance vector
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='r2', Cost=16, Next='r1')
+Distance(Dest='h2', Cost=22, Next='r1')
+
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+223.1.1.1
+r1 received your distance vector
+223.1.3.2
+r4 received your distance vector
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+223.1.3.2
+r4 received your distance vector
+r3 successfully send dv to neighbors
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+r3 successfully send dv to neighbors
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+waiting for accept
+before updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
+after updating my DV
+Distance(Dest='r1', Cost=6, Next='r1')
+Distance(Dest='r4', Cost=5, Next='r4')
+Distance(Dest='h1', Cost=8, Next='r1')
+Distance(Dest='h2', Cost=7, Next='r4')
+Distance(Dest='r2', Cost=9, Next='r4')
+
