@@ -76,6 +76,7 @@ class Host:
             s.bind((host, port))
             s.listen(5)
             self.writelog((self.hostname + ' is listening at port %d\n' %(port)))
+            self.writelog('timestamp = ' + str(time.time()) + '\n')
         except socket.error as err:
             self.writelog((self.hostname + ' socket failed with error %s\n' %(err)))
 
@@ -83,7 +84,6 @@ class Host:
 
         while 1:
             try:
-                self.writelog('waiting for accept\n')
                 conn, addr = s.accept() # wait to accept a connection - blocking call
 
                 t = threading.Thread(target=self.clientthread, args=(conn, addr))
@@ -107,7 +107,9 @@ class Host:
         except Exception as e:
             print('error in receiving data', e)
 
-        conn.sendall(self.hostname + ' received your distance vector')
+        neighbor = dv[0]            # receive the distance vector from neighbor
+        conn.sendall(self.hostname + ' received ' + neighbor + "'s distance vector")
+        self.writelog('\n\n' + self.hostname + ' received ' + 'distance vector from ' + neighbor + '\n')
 
         conn.close()
         self.writelog('before updating my DV\n')
@@ -121,7 +123,7 @@ class Host:
                 nexthop  = distance[2]
                 neighbor_dv.append(DistanceVector.Distance(Dest=neighbor, Cost=int(weight), Next=nexthop))
 
-        neighbor = dv[0]   # receive the distance vector from neighbor
+        neighbor = dv[0]            # receive the distance vector from neighbor
         flag = False       # record whether there is an update
         cost_to_neighbor = 9999
         for distance in self.my_dv.dv:
@@ -148,12 +150,12 @@ class Host:
             self.my_dv.dv.append(new_d)
         lock.release()
 
+        self.writelog('after updating my DV at timestamp = ' + str(time.time()) + '\n')
+        self.writelog(str(self.my_dv) + '\n')
+
         if flag:
             t = threading.Thread(target=host.send_dv)
             t.start()
-
-        self.writelog('after updating my DV\n')
-        self.writelog(str(self.my_dv) + '\n')
 
 
     def send_dv(self):
@@ -167,31 +169,17 @@ class Host:
         while len(send_queue) >= 1:
             try:
                 ip = send_queue[0]
-                self.writelog(ip + '\n')
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 s.connect((ip, port))
                 s.send(self.data_to_send())
                 reply = s.recv(1048)
-                self.writelog(reply + '\n')
+                #self.writelog(reply + '\n')
                 send_queue.pop(0)
-                time.sleep(0.1)
+                time.sleep(0.01)
             except socket.error as err:
                 self.writelog('Oops! error when sending distance vector', err)
 
         self.writelog(self.hostname + ' successfully send dv to neighbors' + '\n')
-
-        '''
-        ip = '0.0.0.0'
-        try:
-            s.connect((ip, port))
-            s.send(self.data_to_send())
-            reply = s.recv(1048)
-            print(reply
-        except socket.error as err:
-            print('Oops! error when sending distance vector', err)
-        finally:
-            s.close()
-        '''
 
 
     def data_to_send(self):
@@ -211,15 +199,12 @@ if __name__ == '__main__':
     if len(sys.argv) == 2:
         hostname = sys.argv[1]
         host = Host(hostname)
-        host.writelog('checkpoint-1\n')
+
         t = threading.Thread(target=host.send_dv)
         t.start()
 
-        host.writelog('checkpoint-2\n')
-        #print('checkpoint-1')
         host.start_listening()
 
-        #print('checkpoint-2')
     else:
         print('Error with parameters')
 

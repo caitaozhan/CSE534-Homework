@@ -1,12 +1,8 @@
-checkpoint-1
-223.1.2.2
-checkpoint-2
 r2 is listening at port 6666
-waiting for accept
-r1 received your distance vector
-223.1.4.1
-r4 received your distance vector
-waiting for accept
+timestamp = 1524510245.8
+
+
+r2 received distance vector from r1
 before updating my DV
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
@@ -14,17 +10,17 @@ Distance(Dest='h1', Cost=9999, Next='')
 Distance(Dest='h2', Cost=9999, Next='')
 Distance(Dest='r3', Cost=9999, Next='')
 
-after updating my DV
+after updating my DV at timestamp = 1524510245.82
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
 Distance(Dest='h2', Cost=9999, Next='')
 Distance(Dest='h1', Cost=12, Next='r1')
 Distance(Dest='r3', Cost=16, Next='r1')
 
-223.1.2.2
-r1 received your distance vector
 r2 successfully send dv to neighbors
-waiting for accept
+
+
+r2 received distance vector from r4
 before updating my DV
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
@@ -32,59 +28,7 @@ Distance(Dest='h2', Cost=9999, Next='')
 Distance(Dest='h1', Cost=12, Next='r1')
 Distance(Dest='r3', Cost=16, Next='r1')
 
-after updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-223.1.2.2
-r1 received your distance vector
-waiting for accept
-before updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-after updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-223.1.4.1
-r4 received your distance vector
-223.1.4.1
-waiting for accept
-before updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-after updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-r4 received your distance vector
-r2 successfully send dv to neighbors
-waiting for accept
-before updating my DV
-Distance(Dest='r1', Cost=10, Next='r1')
-Distance(Dest='r4', Cost=4, Next='r4')
-Distance(Dest='h1', Cost=12, Next='r1')
-Distance(Dest='h2', Cost=6, Next='r4')
-Distance(Dest='r3', Cost=9, Next='r4')
-
-after updating my DV
+after updating my DV at timestamp = 1524510245.83
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
 Distance(Dest='h1', Cost=12, Next='r1')
@@ -92,7 +36,9 @@ Distance(Dest='h2', Cost=6, Next='r4')
 Distance(Dest='r3', Cost=9, Next='r4')
 
 r2 successfully send dv to neighbors
-waiting for accept
+
+
+r2 received distance vector from r4
 before updating my DV
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
@@ -100,14 +46,16 @@ Distance(Dest='h1', Cost=12, Next='r1')
 Distance(Dest='h2', Cost=6, Next='r4')
 Distance(Dest='r3', Cost=9, Next='r4')
 
-after updating my DV
+after updating my DV at timestamp = 1524510245.85
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
 Distance(Dest='h1', Cost=12, Next='r1')
 Distance(Dest='h2', Cost=6, Next='r4')
 Distance(Dest='r3', Cost=9, Next='r4')
 
-waiting for accept
+
+
+r2 received distance vector from r1
 before updating my DV
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
@@ -115,7 +63,59 @@ Distance(Dest='h1', Cost=12, Next='r1')
 Distance(Dest='h2', Cost=6, Next='r4')
 Distance(Dest='r3', Cost=9, Next='r4')
 
-after updating my DV
+after updating my DV at timestamp = 1524510245.86
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+
+
+r2 received distance vector from r1
+before updating my DV
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+after updating my DV at timestamp = 1524510245.86
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+r2 successfully send dv to neighbors
+
+
+r2 received distance vector from r4
+before updating my DV
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+after updating my DV at timestamp = 1524510245.86
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+
+
+r2 received distance vector from r1
+before updating my DV
+Distance(Dest='r1', Cost=10, Next='r1')
+Distance(Dest='r4', Cost=4, Next='r4')
+Distance(Dest='h1', Cost=12, Next='r1')
+Distance(Dest='h2', Cost=6, Next='r4')
+Distance(Dest='r3', Cost=9, Next='r4')
+
+after updating my DV at timestamp = 1524510245.86
 Distance(Dest='r1', Cost=10, Next='r1')
 Distance(Dest='r4', Cost=4, Next='r4')
 Distance(Dest='h1', Cost=12, Next='r1')
