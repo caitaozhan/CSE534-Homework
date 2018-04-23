@@ -52,7 +52,12 @@ def startNetwork():
     #for host in net.hosts:
      #   host.cmdPrint("ps aux")
 
-    #net.get('h1').cmdPrint("python /home/ping.py > /home/ping.log &")
+    net.get('h1').cmdPrint("python /home/riplite.py > /home/log/h1 &")
+    #net.get('h2').cmdPrint("python /home/riplite.py > /home/log/h2 &")
+    net.get('r1').cmdPrint("python /home/riplite.py > /home/log/r1 &")
+    #net.get('r2').cmdPrint("python /home/riplite.py > /home/log/r2 &")
+    #net.get('r3').cmdPrint("python /home/riplite.py > /home/log/r3 &")
+    #net.get('r4').cmdPrint("python /home/riplite.py > /home/log/r4 &")
 
     info('** Testing network connectivity\n')
     net.ping(net.hosts)

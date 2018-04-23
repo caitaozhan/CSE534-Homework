@@ -3,6 +3,7 @@ import sys
 import socket
 from thread import start_new_thread
 import time
+import threading
 
 class Host:
     '''
@@ -84,7 +85,7 @@ class Host:
 
 
     def clientthread(self, conn):
-        '''Handle connection. Used for creating threads
+        '''Handle a connection from client. Used for creating threads
         '''
         dv = ''
         while 1:
@@ -99,7 +100,7 @@ class Host:
             except Exception as e:
                 print('error in receiving data', e)
 
-            conn.sendall(self.hostname + ' received your data')
+            conn.sendall(self.hostname + ' received your distance vector')
         conn.close()
         print('start updating my DV')
         print(self.my_dv)
@@ -121,10 +122,12 @@ class Host:
 
         print(neighbor_dv)
 
+        lock = threading.Lock()               # prevent multiple threads updating distance vector at the same time
+        lock.acquire()
         my_new_dv = []
-        for neighbor_d in neighbor_dv[:]:  # a copy of neighbor_dv
+        for neighbor_d in neighbor_dv:
             destination = neighbor_d.Dest
-            for mydis in self.my_dv.dv:
+            for mydis in self.my_dv.dv[:]:    # a copy of my distance vector
                 if mydis.Dest == destination:
                     pre_cost = mydis.Cost
                     new_cost = cost_to_neighbor + neighbor_d.Cost
@@ -133,10 +136,13 @@ class Host:
                         self.my_dv.dv.remove(mydis)
                         my_new_dv.append(DistanceVector.Distance(Dest=destination, Cost=new_cost, Next=neighbor))
                         flag = True
-        if flag:
-            for new_d in my_new_dv:
-                self.my_dv.dv.append(new_d)
+        for new_d in my_new_dv:
+            self.my_dv.dv.append(new_d)
+        lock.release()
 
+        if flag:
+            time.sleep(0.5)
+            self.send_dv()
 
         print('end updating my DV')
         print(self.my_dv)
@@ -176,10 +182,8 @@ if __name__ == '__main__':
     if len(sys.argv) == 2:
         hostname = sys.argv[1]
         host = Host(hostname)
-        if hostname == 'h1':
-            host.start_listening()
-        elif hostname == 'r1':
-            host.send_dv()
+        host.start_listening()
+        host.send_dv()
 
         '''
         host.start_listening()
