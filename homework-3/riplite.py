@@ -41,6 +41,9 @@ class Host:
         for host in self.non_neighbor:
             self.my_dv.add_distance(DistanceVector.Distance(Dest=host, Cost=9999, Next=''))
 
+        self.writelog('initialization at timestamp = ' + str(time.time()) + '\n')
+        self.writelog(str(self.my_dv) + '\n')
+
 
     def writelog(self, message):
         f = open('/home/log/'+self.hostname, 'a')
@@ -112,8 +115,6 @@ class Host:
         self.writelog('\n\n' + self.hostname + ' received ' + 'distance vector from ' + neighbor + '\n')
 
         conn.close()
-        self.writelog('before updating my DV\n')
-        self.writelog(str(self.my_dv)+'\n')
         neighbor_dv = []
         for distance in dv[1:-1]:
             distance  = distance.split(' ')
@@ -150,7 +151,7 @@ class Host:
             self.my_dv.dv.append(new_d)
         lock.release()
 
-        self.writelog('after updating my DV at timestamp = ' + str(time.time()) + '\n')
+        self.writelog('update my DV at timestamp = ' + str(time.time()) + '\n')
         self.writelog(str(self.my_dv) + '\n')
 
         if flag:
