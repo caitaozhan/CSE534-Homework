@@ -195,6 +195,75 @@ class Host:
         return string
 
 
+    def check_neighbor(self):
+        '''Periodically check the weights of my neighbor
+        '''
+        while 1:
+            time.sleep(0.5)  # check neighbors every 0.5 second
+            try:
+                neighbor_ip = {}
+                with open('/home/neighbor/' + self.hostname + '_neighbor', 'r') as f:
+                    lines = f.readlines()
+                    for line in lines:
+                        line = line.strip().split(' ')
+                        neighbor = line[0]
+                        ip = line[1]
+                        neighbor_ip[neighbor] = ip
+                for neighbor in neighbor_ip:
+                    new_ip = neighbor_ip[neighbor]
+                    pre_ip = self.neighbor_ip[neighbor]
+                    if pre_ip != new_ip:                 # if an IP changed
+                        self.writelog(self.hostname + " neighbor IP changed!\n")
+                        self.writelog('previous ip = ' + pre_ip + ', new ip = ' + new_ip + '\n')
+                        self.neighbor_ip = neighbor_ip
+                        self.send_dv()
+                        break
+            except Exception as e:
+                self.writelog('error in checking neighbor' + e)
+
+
+def change_neighbor():
+    '''change r1-r3 from 6 to 1
+    '''
+    time.sleep(2.9)   # change the neighbor after sleeping 2.9 seconds
+    print('start changing r1-r3')
+    try:
+        new_str = []
+        with open('/home/neighbor/' + 'r1', 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip().split(' ')
+                if line[0] == 'r3':
+                    new_str.append(line[0] + ' 1' + '\n')
+                else:
+                    new_str.append(line[0] + ' ' + line[1] + '\n')
+            f.close()
+
+        with open('/home/neighbor/' + 'r1', 'w') as f:
+            f.write(''.join(new_str))
+    except Exception as e:
+        print('error in changing neighbors', e)
+
+    print('start changing r3-r1')
+    try:
+        new_str = []
+        with open('/home/neighbor/' + 'r3', 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip().split(' ')
+                if line[0] == 'r1':
+                    new_str.append(line[0] + ' 1' + '\n')
+                else:
+                    new_str.append(line[0] + ' ' + line[1] + '\n')
+            f.close()
+
+        with open('/home/neighbor/' + 'r3', 'w') as f:
+            f.write(''.join(new_str))
+    except Exception as e:
+        print('error in changing neighbors', e)
+
+
+
 if __name__ == '__main__':
 
     if len(sys.argv) == 2:
@@ -204,17 +273,14 @@ if __name__ == '__main__':
         t = threading.Thread(target=host.send_dv)
         t.start()
 
+	t1 = threading.Thread(target=host.check_neighbor)
+        t1.start()
+
+        #t2 = threading.Thread(target=change_neighbor)
+        #t2.start()
+
         host.start_listening()
 
     else:
         print('Error with parameters')
 
-
-    '''
-    hostname = sys.argv[1]
-    host = Host(hostname)
-    if hostname == 'r1':
-        host.start_listening()
-    else:
-        host.send_dv()
-    '''
