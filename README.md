@@ -1,4 +1,4 @@
-# CSE532-Code
+# CSE534-Code
 Fundamentals of computer networks
 
 Homework 1: [All about DNS](https://github.com/caitaozhan/CSE534-Code/blob/master/homework-1/assignment1.pdf). I scored 95/100. I lost 5 points because my dnssec program was not stable. It worked perfectly well when I submitted the homework. But a bug came out of nowhere when the TA was grading homework :(
