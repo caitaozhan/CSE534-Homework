@@ -16,3 +16,5 @@ Statistics of the three homeworks:
 |hw1 | 79.29 | 87.5| 95 |
 |hw2 | 79.32 | 85| 91 |
 | hw3 | 79.44 | 86 | 92 |
+
+My rating on the professor: [11/20/2018](https://www.ratemyprofessors.com/ShowRatings.jsp?tid=2113729)
