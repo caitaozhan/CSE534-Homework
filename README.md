@@ -26,7 +26,9 @@ Update: 9/18/2020
 In the past two years, my CSE 534 homework repository is getting pretty popular. Below are some traffic statistics. There are 14 unique cloners in the past 14 days. Considering a class of only 30+ students in Fall 2020, this is almost 50% of students cloning! Hope this repository is helping you out the homework. BUT don't get caught in **plagiarism**. Don't do control+C and control+V.
 
 ![cse534](https://github.com/caitaozhan/CSE534-Homework/blob/master/CSE534.png)
+
 Fig. 1 clones.
 
 ![cse534-2](https://github.com/caitaozhan/CSE534-Homework/blob/master/CSE534-2.png)
+
 Fig. 2 views.
