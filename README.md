@@ -23,7 +23,9 @@ My rating on the professor: [11/20/2018](https://www.ratemyprofessors.com/ShowRa
 
 Update: 9/18/2020
 
-In the past two years, my CSE 534 homework repository is getting pretty popular. Below are some traffic statistics. There are 14 unique cloners in the past 14 days. Considering a class of only 30+ students in Fall 2020, this is almost 50% of students cloning! Hope this repository is helping you out the homework. BUT don't get caught in **plagiarism**. Don't do control+C and control+V.
+In the past two years, my CSE 534 homework repository is getting pretty popular. Below two figures are traffic statistics. There are 14 unique cloners in the past 14 days. Considering a class of only 30+ students in Fall 2020, this is almost 50% of students cloning! Hope this repository is helping you out the homework. BUT don't get caught in **plagiarism**. Don't do control+C and control+V.
+
+PS: My other repository CSE512 homework (taught by Prof. Minh) is also pretty popular. However, I observed that the new professor Yifan Sun is developing her own homework, not using Minh's homework.
 
 ![cse534](https://github.com/caitaozhan/CSE534-Homework/blob/master/CSE534.png)
 
