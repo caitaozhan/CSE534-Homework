@@ -27,8 +27,8 @@ In the past two years, my CSE 534 homework repository is getting pretty popular.
 
 ![cse534](https://github.com/caitaozhan/CSE534-Homework/blob/master/CSE534.png)
 
-Fig. 1 clones.
+Figure 1: 14 unique clones and 24 unique visitors.
 
 ![cse534-2](https://github.com/caitaozhan/CSE534-Homework/blob/master/CSE534-2.png)
 
-Fig. 2 views.
+Figure 2: Referring sites and popular content.
